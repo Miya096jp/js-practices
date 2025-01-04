@@ -4,7 +4,7 @@ import minimist from "minimist";
 import dayjs from "dayjs";
 
 const argv = minimist(process.argv.slice(2));
-const year = argv["y"] ? argv["y"] : dayjs().year();
+const year = argv["y"] ?? dayjs().year();
 const month = argv["m"] ? argv["m"] - 1 : dayjs().month();
 
 const first_date = dayjs(new Date(year, month, 1));
