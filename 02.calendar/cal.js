@@ -10,14 +10,14 @@ const month = argv["m"] ? argv["m"] - 1 : dayjs().month();
 const first_date = dayjs(new Date(year, month, 1));
 const last_date = dayjs(new Date(year, month + 1, 0));
 
-const days = [];
+const dates = [];
 
 for (let i = 1; i <= last_date.date(); i++) {
-  days.push(dayjs(new Date(year, month, i)));
+  dates.push(dayjs(new Date(year, month, i)));
 }
 
 const calender_body =
-  days
+  dates
     .map((day) => {
       const padded_day = String(day.date()).padStart(2, " ");
       if (day.day() === 6) {
