@@ -1,4 +1,4 @@
-import { run, get } from "./db_util.js";
+import { run, get } from "./lib/db_util.js";
 import sqlite3 from "sqlite3";
 
 const db = new sqlite3.Database(":memory:");

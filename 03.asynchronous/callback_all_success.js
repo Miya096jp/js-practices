@@ -11,7 +11,7 @@ db.run(
     console.log("Created 'books' table.");
     db.run("INSERT INTO books (title) VALUES (?)", ["book1"], () => {
       db.get("SELECT * FROM books WHERE id = ?", [1], (_, row) => {
-        console.log(`Id is ${row.id}`);
+        console.log(`id is ${row.id}`);
         db.get("SELECT * FROM books WHERE id = ?", [1], (_, row) => {
           console.log(row);
           db.run("DROP TABLE books", () => {
