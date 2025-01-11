@@ -18,7 +18,7 @@ run(
   })
   .then((row) => {
     console.log(row);
-    return run("DROP TABLE IF EXISTS books");
+    return run("DROP TABLE books");
   })
   .then(() => {
     console.log("Dropped");

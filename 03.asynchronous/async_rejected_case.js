@@ -17,7 +17,7 @@ async function rejectedCase() {
   } catch (err) {
     console.log(err);
   } finally {
-    await run("DROP TABLE IF EXISTS books");
+    await run("DROP TABLE books");
     console.log("Dropped");
   }
 }

@@ -15,7 +15,7 @@ run(
   })
   .catch((err) => {
     console.log(err);
-    return run("DROP TABLE IF EXISTS books");
+    return run("DROP TABLE books");
   })
   .then(() => {
     console.log("Dropped");

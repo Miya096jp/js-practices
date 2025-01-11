@@ -11,7 +11,7 @@ async function allResolved() {
   const row = await get("SELECT * FROM books WHERE id = ?", [1]);
   console.log(`id is ${row.id}`);
   console.log(row);
-  await run("DROP TABLE IF EXISTS books");
+  await run("DROP TABLE books");
   console.log("Dropped");
 }
 

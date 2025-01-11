@@ -16,7 +16,7 @@ db.run(
         if (err) {
           console.error(err.message);
         }
-        db.run("DROP TABLE IF EXISTS books", () => {
+        db.run("DROP TABLE books", () => {
           console.log("Dropped 'books' table if existed.");
         });
       });
