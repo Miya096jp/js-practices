@@ -3,27 +3,48 @@ import sqlite3 from "sqlite3";
 
 const db = new sqlite3.Database(":memory:");
 
-async function rejectedCase() {
-  try {
-    await run(
-      db,
-      `CREATE TABLE books (
+try {
+  await run(
+    db,
+    `CREATE TABLE books (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       title TEXT NOT NULL UNIQUE)`,
-    );
-    console.log("Created 'books' table.");
-    await run(db, "INSERT INTO books (title) VALUES (?)", []);
-  } catch (err) {
-    console.error(err.message);
-  }
-  try {
-    await get(db, "SELECT * FRM books WHERE id = ?", [1]);
-  } catch (err) {
-    console.error(err.message);
-  } finally {
-    await run(db, "DROP TABLE books");
-    console.log("Dropped 'books' table.");
-  }
+  );
+  console.log("Created 'books' table.");
+  await run(db, "INSERT INTO books (title) VALUES (?)", []);
+} catch (err) {
+  console.error(err.message);
+}
+try {
+  await get(db, "SELECT * FRM books WHERE id = ?", [1]);
+} catch (err) {
+  console.error(err.message);
+} finally {
+  await run(db, "DROP TABLE books");
+  console.log("Dropped 'books' table.");
 }
 
-rejectedCase();
+// async function rejectedCase() {
+//   try {
+//     await run(
+//       db,
+//       `CREATE TABLE books (
+//       id INTEGER PRIMARY KEY AUTOINCREMENT,
+//       title TEXT NOT NULL UNIQUE)`,
+//     );
+//     console.log("Created 'books' table.");
+//     await run(db, "INSERT INTO books (title) VALUES (?)", []);
+//   } catch (err) {
+//     console.error(err.message);
+//   }
+//   try {
+//     await get(db, "SELECT * FRM books WHERE id = ?", [1]);
+//   } catch (err) {
+//     console.error(err.message);
+//   } finally {
+//     await run(db, "DROP TABLE books");
+//     console.log("Dropped 'books' table.");
+//   }
+// }
+
+// rejectedCase();
