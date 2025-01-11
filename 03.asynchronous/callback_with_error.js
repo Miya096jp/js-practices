@@ -17,7 +17,7 @@ db.run(
           console.error(err.message);
         }
         db.run("DROP TABLE books", () => {
-          console.log("Dropped 'books' table if existed.");
+          console.log("Dropped 'books' table.");
         });
       });
     });

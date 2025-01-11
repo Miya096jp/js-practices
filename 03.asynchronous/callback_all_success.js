@@ -15,7 +15,7 @@ db.run(
         db.get("SELECT * FROM books WHERE id = ?", [1], (_, row) => {
           console.log(row);
           db.run("DROP TABLE books", () => {
-            console.log("Dropped 'books' table if it existed.");
+            console.log("Dropped 'books' table.");
           });
         });
       });

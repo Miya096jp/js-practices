@@ -10,13 +10,13 @@ async function allResolved() {
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL UNIQUE)`,
   );
-  console.log("Created");
+  console.log("Created 'books' table.");
   await run(db, "INSERT INTO books (title) VALUES (?)", ["book1"]);
   const row = await get(db, "SELECT * FROM books WHERE id = ?", [1]);
   console.log(`id is ${row.id}`);
   console.log(row);
   await run(db, "DROP TABLE books");
-  console.log("Dropped");
+  console.log("Dropped 'books' table.");
 }
 
 allResolved();

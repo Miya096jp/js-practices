@@ -10,7 +10,7 @@ run(
   title TEXT NOT NULL UNIQUE)`,
 )
   .then(() => {
-    console.log("Created");
+    console.log("Created 'books' table.");
     return run(db, "INSERT INTO books (title) VALUES (?)", []);
   })
   .catch((err) => {
@@ -22,5 +22,5 @@ run(
     return run(db, "DROP TABLE books");
   })
   .then(() => {
-    console.log("Dropped");
+    console.log("Dropped 'books' table.");
   });

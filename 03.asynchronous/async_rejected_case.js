@@ -11,7 +11,7 @@ async function rejectedCase() {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       title TEXT NOT NULL UNIQUE)`,
     );
-    console.log("Created");
+    console.log("Created 'books' table.");
     await run(db, "INSERT INTO books (title) VALUES (?)", []);
   } catch (err) {
     console.error(err.message);
@@ -22,7 +22,7 @@ async function rejectedCase() {
     console.error(err.message);
   } finally {
     await run(db, "DROP TABLE books");
-    console.log("Dropped");
+    console.log("Dropped 'books' table.");
   }
 }
 
