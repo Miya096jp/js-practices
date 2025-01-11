@@ -14,11 +14,11 @@ run(
     return run(db, "INSERT INTO books (title) VALUES (?)", []);
   })
   .catch((err) => {
-    console.log(err.message);
+    console.error(err.message);
     return get(db, "SELECT * FRM books WHERE id = ?", [1]);
   })
   .catch((err) => {
-    console.log(err.message);
+    console.error(err.message);
     return run(db, "DROP TABLE books");
   })
   .then(() => {

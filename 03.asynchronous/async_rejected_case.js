@@ -14,12 +14,12 @@ async function rejectedCase() {
     console.log("Created");
     await run(db, "INSERT INTO books (title) VALUES (?)", []);
   } catch (err) {
-    console.log(err.message);
+    console.error(err.message);
   }
   try {
     await get(db, "SELECT * FRM books WHERE id = ?", [1]);
   } catch (err) {
-    console.log(err.message);
+    console.error(err.message);
   } finally {
     await run(db, "DROP TABLE books");
     console.log("Dropped");
