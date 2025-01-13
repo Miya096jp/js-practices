@@ -12,7 +12,7 @@ db.run(
       if (err) {
         console.error(err.message);
       }
-      db.get("SELECT * FRM books WHERE id = ?", [1], (err) => {
+      db.get("SELECT * FROM users WHERE id = ?", [1], (err) => {
         if (err) {
           console.error(err.message);
         }

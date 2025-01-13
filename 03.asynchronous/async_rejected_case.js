@@ -16,7 +16,7 @@ try {
   console.error(err.message);
 }
 try {
-  await get(db, "SELECT * FRM books WHERE id = ?", [1]);
+  await get(db, "SELECT * FROM users WHERE id = ?", [1]);
 } catch (err) {
   console.error(err.message);
 }

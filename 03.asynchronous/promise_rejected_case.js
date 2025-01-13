@@ -15,7 +15,7 @@ run(
   })
   .catch((err) => {
     console.error(err.message);
-    return get(db, "SELECT * FRM books WHERE id = ?", [1]);
+    return get(db, "SELECT * FROM users WHERE id = ?", [1]);
   })
   .catch((err) => {
     console.error(err.message);
