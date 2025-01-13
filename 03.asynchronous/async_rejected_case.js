@@ -11,7 +11,7 @@ await run(
 );
 console.log("Created 'books' table.");
 try {
-  await run(db, "INSERT INTO books (title) VALUES (?)", []);
+  await run(db, "INSERT INTO books (title) VALUES (?)", [null]);
 } catch (err) {
   console.error(err.message);
 }

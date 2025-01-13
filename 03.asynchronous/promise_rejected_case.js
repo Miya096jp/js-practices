@@ -11,7 +11,7 @@ run(
 )
   .then(() => {
     console.log("Created 'books' table.");
-    return run(db, "INSERT INTO books (title) VALUES (?)", []);
+    return run(db, "INSERT INTO books (title) VALUES (?)", [null]);
   })
   .catch((err) => {
     console.error(err.message);

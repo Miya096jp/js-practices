@@ -8,7 +8,7 @@ db.run(
   title TEXT NOT NULL UNIQUE)`,
   () => {
     console.log("Created 'books' table.");
-    db.run("INSERT INTO books (title) VALUES (?)", (err) => {
+    db.run("INSERT INTO books (title) VALUES (?)", [null], (err) => {
       if (err) {
         console.error(err.message);
       }
