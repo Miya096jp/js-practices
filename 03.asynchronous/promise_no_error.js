@@ -5,9 +5,7 @@ const db = new sqlite3.Database(":memory:");
 
 run(
   db,
-  `CREATE TABLE books (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  title TEXT NOT NULL UNIQUE)`,
+  `CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT,title TEXT NOT NULL UNIQUE)`,
 )
   .then(() => {
     console.log("Created 'books' table.");
