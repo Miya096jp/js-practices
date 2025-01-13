@@ -10,9 +10,9 @@ await run(
     title TEXT NOT NULL UNIQUE)`,
 );
 console.log("Created 'books' table.");
-await run(db, "INSERT INTO books (title) VALUES (?)", ["book1"]);
-const row = await get(db, "SELECT * FROM books WHERE id = ?", [1]);
-console.log(`id is ${row.id}`);
+const result = await run(db, "INSERT INTO books (title) VALUES (?)", ["book1"]);
+console.log(`id is ${result.lastID}`);
+const row = await get(db, "SELECT * FROM books WHERE id = ?", [result.lastID]);
 console.log(row);
 await run(db, "DROP TABLE books");
 console.log("Dropped 'books' table.");

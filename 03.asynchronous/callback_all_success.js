@@ -9,14 +9,12 @@ db.run(
   )`,
   () => {
     console.log("Created 'books' table.");
-    db.run("INSERT INTO books (title) VALUES (?)", ["book1"], () => {
-      db.get("SELECT * FROM books WHERE id = ?", [1], (_, row) => {
-        console.log(`id is ${row.id}`);
-        db.get("SELECT * FROM books WHERE id = ?", [1], (_, row) => {
-          console.log(row);
-          db.run("DROP TABLE books", () => {
-            console.log("Dropped 'books' table.");
-          });
+    db.run("INSERT INTO books (title) VALUES (?)", ["book1"], function () {
+      console.log(`id is ${this.lastID}`);
+      db.get("SELECT * FROM books WHERE id = ?", [this.lastID], (_, row) => {
+        console.log(row);
+        db.run("DROP TABLE books", () => {
+          console.log("Dropped 'books' table.");
         });
       });
     });

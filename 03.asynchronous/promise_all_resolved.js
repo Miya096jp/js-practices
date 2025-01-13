@@ -13,10 +13,9 @@ run(
     console.log("Created 'books' table.");
     return run(db, "INSERT INTO books (title) VALUES (?)", ["book1"]);
   })
-  .then(() => get(db, "SELECT * FROM books WHERE id = ?", [1]))
-  .then((row) => {
-    console.log(`id is ${row.id}`);
-    return get(db, "SELECT * FROM books WHERE id = ?", [1]);
+  .then((result) => {
+    console.log(`id id ${result.lastID}`);
+    return get(db, "SELECT * FROM books WHERE id = ?", [result.lastID]);
   })
   .then((row) => {
     console.log(row);

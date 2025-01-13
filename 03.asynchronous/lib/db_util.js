@@ -1,10 +1,10 @@
 export function run(db, sql, param) {
   return new Promise((resolve, reject) => {
-    db.run(sql, param, (err) => {
+    db.run(sql, param, function (err) {
       if (err) {
         reject(err);
       } else {
-        resolve();
+        resolve(this);
       }
     });
   });
