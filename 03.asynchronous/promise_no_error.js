@@ -12,7 +12,7 @@ run(
     return run(db, "INSERT INTO books (title) VALUES (?)", ["book1"]);
   })
   .then((result) => {
-    console.log(`id id ${result.lastID}`);
+    console.log(`id is ${result.lastID}`);
     return get(db, "SELECT * FROM books WHERE id = ?", [result.lastID]);
   })
   .then((row) => {
