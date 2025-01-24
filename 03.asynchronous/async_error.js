@@ -12,11 +12,7 @@ console.log("Created 'books' table.");
 try {
   await run(db, "INSERT INTO books (title) VALUES (?)", [null]);
 } catch (err) {
-  if (
-    err instanceof Error &&
-    "code" in err &&
-    err.code === "SQLITE_CONSTRAINT"
-  ) {
+  if (err instanceof Error && err.code === "SQLITE_CONSTRAINT") {
     console.error(err.message);
   } else {
     throw err;
@@ -25,7 +21,7 @@ try {
 try {
   await get(db, "SELECT * FROM users WHERE id = ?", [1]);
 } catch (err) {
-  if (err instanceof Error && "code" in err && err.code === "SQLITE_ERROR") {
+  if (err instanceof Error && err.code === "SQLITE_ERROR") {
     console.error(err.message);
   } else {
     throw err;
