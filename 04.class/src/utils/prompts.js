@@ -46,12 +46,11 @@ export default class Prompts {
   }
 
   build_choices(all_notes) {
-    const choices = [];
-    all_notes.forEach((row) => {
+    const choices = all_notes.map((row) => {
       const obj = {};
       obj.name = row.title;
       obj.value = row.id;
-      choices.push(obj);
+      return obj;
     });
     return choices;
   }
