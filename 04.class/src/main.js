@@ -21,19 +21,30 @@ async function initialize() {
 async function exec() {
   const note_repository = await initialize();
   const argv = minimist(process.argv.slice(1));
-  const prompts = new Prompts();
-  const controller = new CLIController(argv, note_repository, prompts);
+  const option = new Option(argv);
+  // const prompts = new Prompts();
+  const note_controller = new NoteController(note_repository);
 
-  if (controller.list) {
-    const list = await controller.listTitle();
+  if (option.list) {
+    const list = await note_controller.listTitle();
     console.log(list);
-  } else if (controller.read) {
-    const note = await controller.readNote();
+  } else if (option.read) {
+    const all_notes = await note_controller.readAllNotes();
+    const message = "Choose a note your want to see.";
+    const prompts = new Prompts(message, all_notes);
+    const id = await prompts.select();
+    const note = await note_controller.readNote(id);
     console.log(note.body);
-  } else if (controller.delete) {
-    await controller.deleteNote();
+  } else if (option.delete) {
+    const all_notes = await note_controller.readAllNotes();
+    const message = "Choose a note your want to delete.";
+    const prompts = new Prompts(message, all_notes);
+    const id = await prompts.select();
+    await note_controller.deleteNote(id);
   } else {
-    await controller.writeNote();
+    const prompts = new Prompts();
+    const lines = await prompts.inputText();
+    await note_controller.writeNote(lines);
   }
 }
 
@@ -42,3 +53,28 @@ await exec().catch((err) => {
   console.error(err.stack);
   process.exit(1);
 });
+
+// async function exec() {
+//   const note_repository = await initialize();
+//   const argv = minimist(process.argv.slice(1));
+//   const prompts = new Prompts();
+//   const controller = new CLIController(argv, note_repository, prompts);
+
+//   if (controller.list) {
+//     const list = await controller.listTitle();
+//     console.log(list);
+//   } else if (controller.read) {
+//     const note = await controller.readNote();
+//     console.log(note.body);
+//   } else if (controller.delete) {
+//     await controller.deleteNote();
+//   } else {
+//     await controller.writeNote();
+//   }
+// }
+
+// await exec().catch((err) => {
+//   console.error("An unexpected error occured:", err.message);
+//   console.error(err.stack);
+//   process.exit(1);
+// });
