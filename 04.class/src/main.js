@@ -22,7 +22,6 @@ async function exec() {
   const note_repository = await initialize();
   const argv = minimist(process.argv.slice(1));
   const option = new Option(argv);
-  // const prompts = new Prompts();
   const note_controller = new NoteController(note_repository);
 
   if (option.list) {
@@ -53,28 +52,3 @@ await exec().catch((err) => {
   console.error(err.stack);
   process.exit(1);
 });
-
-// async function exec() {
-//   const note_repository = await initialize();
-//   const argv = minimist(process.argv.slice(1));
-//   const prompts = new Prompts();
-//   const controller = new CLIController(argv, note_repository, prompts);
-
-//   if (controller.list) {
-//     const list = await controller.listTitle();
-//     console.log(list);
-//   } else if (controller.read) {
-//     const note = await controller.readNote();
-//     console.log(note.body);
-//   } else if (controller.delete) {
-//     await controller.deleteNote();
-//   } else {
-//     await controller.writeNote();
-//   }
-// }
-
-// await exec().catch((err) => {
-//   console.error("An unexpected error occured:", err.message);
-//   console.error(err.stack);
-//   process.exit(1);
-// });

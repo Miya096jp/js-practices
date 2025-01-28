@@ -1,5 +1,4 @@
 import { run, all, get } from "../utils/db_util.js";
-import Note from "../models/note.js";
 
 export default class NoteRepository {
   constructor(db) {
@@ -29,21 +28,11 @@ export default class NoteRepository {
   }
 
   async readNote(param) {
-    const record = await get(
-      this.db,
-      "SELECT * FROM notes WHERE id = ?",
-      param,
-    );
-    return new Note(record.id, record.title, record.body);
+    return await get(this.db, "SELECT * FROM notes WHERE id = ?", param);
   }
 
   async readAllNotes() {
-    const all_records = await all(this.db, "SELECT * FROM notes");
-    const all_notes = [];
-    all_records.forEach((record) => {
-      all_notes.push(new Note(record.id, record.title, record.body));
-    });
-    return all_notes;
+    return await all(this.db, "SELECT * FROM notes");
   }
 
   async deleteNote(param) {
