@@ -32,7 +32,7 @@ export default class NoteRepository {
   }
 
   async readAllNotes() {
-    return await all(this.db, "SELECT * FROM notes");
+    return await all(this.db, "SELECT * FROM notes ORDER BY id DESC");
   }
 
   async deleteNote(param) {

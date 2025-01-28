@@ -7,9 +7,8 @@ export default class NoteController {
 
   async listTitle() {
     const all_notes = await this.note_repository.readAllNotes();
-    const titles = [];
-    all_notes.forEach((note) => {
-      titles.push(note.title);
+    const titles = all_notes.map((note) => {
+      return note.title;
     });
     return titles.join("\n");
   }
@@ -34,9 +33,8 @@ export default class NoteController {
 
   async readAllNotes() {
     const all_records = await this.note_repository.readAllNotes();
-    const all_notes = [];
-    all_records.forEach((record) => {
-      all_notes.push(new Note(record.id, record.title, record.body));
+    const all_notes = all_records.map((record) => {
+      return new Note(record.id, record.title, record.body);
     });
     return all_notes;
   }
