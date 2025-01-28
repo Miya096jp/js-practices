@@ -2,7 +2,8 @@ import minimist from "minimist";
 import sqlite3 from "sqlite3";
 import NoteRepository from "./repositories/note_repository.js";
 import Prompts from "./utils/prompts.js";
-import CLIController from "./controllers/cli_controller.js";
+import NoteController from "./controllers/note_controller.js";
+import Option from "./utils/option.js";
 
 const db = new sqlite3.Database("./data/notes.db");
 
