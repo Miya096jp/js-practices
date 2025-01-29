@@ -1,9 +1,9 @@
 import minimist from "minimist";
 import sqlite3 from "sqlite3";
 import NoteRepository from "./repositories/note_repository.js";
-import Prompts from "./utils/prompts.js";
+import Selector from "./utils/selector.js";
 import NoteController from "./controllers/note_controller.js";
-import Option from "./utils/option.js";
+import WorkflowManager from "./utils/workflow_manager.js";
 
 const db = new sqlite3.Database("./data/notes.db");
 
@@ -18,37 +18,25 @@ async function initialize() {
   return note_repository;
 }
 
-async function exec() {
-  const note_repository = await initialize();
-  const argv = minimist(process.argv.slice(1));
-  const option = new Option(argv);
-  const note_controller = new NoteController(note_repository);
+const note_repository = await initialize();
+const argv = minimist(process.argv.slice(1));
+const note_controller = new NoteController(note_repository);
+const all_notes = await note_controller.readAllNotes();
+const selector = new Selector(all_notes);
+const workflow_manager = new WorkflowManager(argv, note_controller, selector);
 
-  if (option.list) {
-    const list = await note_controller.listTitle();
-    console.log(list);
-  } else if (option.read) {
-    const all_notes = await note_controller.readAllNotes();
-    const message = "Choose a note your want to see.";
-    const prompts = new Prompts(message, all_notes);
-    const id = await prompts.select();
-    const note = await note_controller.readNote(id);
-    console.log(note.body);
-  } else if (option.delete) {
-    const all_notes = await note_controller.readAllNotes();
-    const message = "Choose a note your want to delete.";
-    const prompts = new Prompts(message, all_notes);
-    const id = await prompts.select();
-    await note_controller.deleteNote(id);
+try {
+  if (workflow_manager.list) {
+    await workflow_manager.listNote();
+  } else if (workflow_manager.read) {
+    await workflow_manager.readNote();
+  } else if (workflow_manager.delete) {
+    await workflow_manager.deleteNote();
   } else {
-    const prompts = new Prompts();
-    const lines = await prompts.inputText();
-    await note_controller.writeNote(lines);
+    await workflow_manager.writeNote();
   }
-}
-
-await exec().catch((err) => {
+} catch (err) {
   console.error("An unexpected error occured:", err.message);
   console.error(err.stack);
   process.exit(1);
-});
+}
