@@ -1,4 +1,4 @@
-import lineReader from "./line_reader.js";
+import lineReader from "../utils/line_reader.js";
 import Note from "../models/note.js";
 import NoteRepository from "../repositories/note_repository.js";
 import Selector from "../utils/selector.js";

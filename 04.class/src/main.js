@@ -1,6 +1,6 @@
 import minimist from "minimist";
 import sqlite3 from "sqlite3";
-import NoteController from "./utils/note_controller.js";
+import NoteController from "./controller/note_controller.js";
 
 const db = new sqlite3.Database("./data/notes.db");
 
